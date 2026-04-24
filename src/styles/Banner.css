@@ -1,0 +1,35 @@
+.banner {
+  background-color: #f9f8f6;
+  padding: 20px;
+  margin-bottom: 21px;
+  color: #6b6762;
+  border-bottom: 1px solid #ddd9d2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#bannerAccount {
+    text-transform: uppercase;
+    letter-spacing: .18rem;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        color: #2A2825;
+    }
+}
+
+#bannerNom {
+    color: #2A2825;
+    font-size: 17px; 
+    font-weight: 400;
+    font-family: 'EB Garamond', Georgia, serif;
+    letter-spacing: 0.04em;
+    & span {
+        color: #9A9590;
+        font-style: italic;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+}
