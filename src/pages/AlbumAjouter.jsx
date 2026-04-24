@@ -130,7 +130,7 @@ const AlbumAjouter = () => {
         <label className="tag" style={{marginBottom: "12px"}}>Titre de l'album</label>
         <input 
           type="text" 
-          placeholder="Journée à la montagne" 
+          placeholder="Entrez un Titre" 
           className="simpleinput"
           onChange={(e) => setTitre(e.target.value)}
           style={{marginBottom: "30px"}}
@@ -138,7 +138,7 @@ const AlbumAjouter = () => {
         <label className="tag" style={{marginBottom: "12px"}}>Musique de fond</label>
         <input 
           type="text" 
-          placeholder="https://www.youtube.com/watch?v=5TG_... (Optionel)" 
+          placeholder="(Optionnel) Lien Youtube" 
           className="simpleinput"
           onChange={(e) => setMusic(e.target.value)}
         />
