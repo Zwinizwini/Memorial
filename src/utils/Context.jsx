@@ -63,6 +63,11 @@ export const AlbumContext = createContext()
 
 export const AlbumProvider = ({children}) => {
     const [albumList, setAlbumList] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    const saveAlbumList = (l) => {
+        setAlbumList(l)
+    }
 
     useEffect(() => {
         const getAlbum = async () => {
@@ -72,14 +77,16 @@ export const AlbumProvider = ({children}) => {
                 .order('id', {ascending: false})
             
             if(error) console.error(error)
-            if (data) setAlbumList(data)
+            if (data) {saveAlbumList(data)
+                setLoading(false)
+            }
         }
         getAlbum()
     }, [])
 
     return (
-        <AlbumContext.Provider value={{albumList, setAlbumList}}>
-            {children}
+        <AlbumContext.Provider value={{albumList, saveAlbumList, loading, setLoading}}>
+            {!loading && children}
         </AlbumContext.Provider>
     )
 }

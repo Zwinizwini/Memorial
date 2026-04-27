@@ -83,7 +83,7 @@ const AlbumAjouter = () => {
   const [r2Url, setR2U] = useState('')
   const [fileS, setFile] = useState({})
   const navigate = useNavigate()
-  const { albumList, setAlbumList } = useContext(AlbumContext)
+  const { albumList, saveAlbumList } = useContext(AlbumContext)
 
   useEffect(() => {
     document.title='Ajout Album'
@@ -111,11 +111,12 @@ const AlbumAjouter = () => {
     
     album.id = data[0].id
     const newList = [album, ...albumList]
-    setAlbumList(newList)
+    saveAlbumList(newList)
     setIsAjout(true)
     setTimeout(() => {
       setIsAjout(false)
     }, 3000)
+    navigate(`/album/${data[0].id}`)
   }
 
   return (

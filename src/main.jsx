@@ -8,6 +8,7 @@ import Account from './pages/Account'
 import Banner from './components/Banner'
 import Album from './pages/Album'
 import AlbumAjouter from './pages/AlbumAjouter'
+import AlbumModif from './pages/AlbumModif'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,8 +20,9 @@ createRoot(document.getElementById('root')).render(
             <Routes>
               <Route path='/' element={<App />}/>
               <Route path="/account" element={<Account />}/>
-              <Route path='/album/:id/:name' element={<Album />}/>
+              <Route path='/album/:id' element={<Album />}/>
               <Route path='/album/ajouter' element={<AlbumAjouter />}/>
+              <Route path='/album/modifier/:id' element={<AlbumModif />}/>
               <Route path="/*" element={<Error />}/>
             </Routes>
           </AlbumProvider>

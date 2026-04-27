@@ -10,6 +10,7 @@ import SousTitre from "../components/SousTitre"
 import LecteurVideo from "../components/LecteurVideo"
 import ReactPlayer from 'react-player'
 import Volume from "../components/Volume"
+import { Link } from "react-router-dom"
 
 const ProfilDiv = styled.div`
   border-bottom: 1px solid #DDD9D2;
@@ -36,6 +37,23 @@ const Date = styled.p`
   font-family: 'Jost', sans-serif;
 `
 
+const BtnModifier = styled(Link)`
+  background: transparent;
+  border: none;
+  color: #7e7b78;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s;
+  &:hover {
+    color: #2A2825;
+  }
+  &:active {
+    transform: scale(.9);
+  }
+`
+
 const scrollBottom = e => {
   e.current.scrollIntoView({
     behavior: "smooth"
@@ -46,7 +64,7 @@ const scrollBottom = e => {
 
 const Album = () => {
   const scrollRef = useRef(null)
-  const {id, name} = useParams()
+  const {id} = useParams()
   const {albumList} = useContext(AlbumContext)
   const {mediaList, loading} = useContext(MediaContext)
   const [lecteurView, setLecteurView] = useState(null)
@@ -54,11 +72,13 @@ const Album = () => {
   const [muted, setMuted] = useState(false)
 
   const music = albumList.find(album => album.id === parseInt(id))?.music ?? null
+  const name = albumList.find(album => album.id === parseInt(id))?.name ?? null
+  const cover = albumList.find(album => album.id === parseInt(id))?.cover ?? null
   
   useEffect(() => {
     document.title=name
     window.scrollTo(0,0)
-  },[])
+  },[name])
 
   if (loading) return <div className="loader"></div>
 
@@ -89,7 +109,10 @@ const Album = () => {
           <h1>{name}</h1>
           <p className="tag">.{nbPhoto} photos    .{nbVideo} vidéos</p>
         </div>
-        <button className="btnAjout" onClick={() => scrollBottom(scrollRef)}>+ Ajouter des souvenirs</button>
+        <div className="divBtn">
+          <button className="btnAjout" onClick={() => scrollBottom(scrollRef)}>+ Ajouter des souvenirs</button>
+          <BtnModifier to={`/album/modifier/${id}`} state={{name:name, cover: cover, music: music}}>Modifier</BtnModifier>
+        </div>
       </ProfilDiv>
       <div className="content" style={{background:"#F8F7F5", padding:"0"}}>
         <div className="container-carousel">

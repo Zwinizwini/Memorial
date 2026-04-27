@@ -4,13 +4,13 @@ import AutoHeight from "embla-carousel-auto-height"
 import { useEffect, useState } from "react"
 
 const Carrousel = ({mediaList}) => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()], [AutoHeight()])
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({stopOnInteraction: false})], [AutoHeight()])
     const [lecteurView, setLecteurView] = useState(null)
     const tailleList = mediaList.length
 
     useEffect(() => {
         if (!emblaApi) return
-        if (tailleList > 1) emblaApi.plugins().autoplay?.play()
+        if (tailleList > 1) emblaApi.plugins()[0]?.play()
     }, [emblaApi])
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Carrousel = ({mediaList}) => {
 
     return (
         <>
-            <div className="embla" onClick={() => setTimeout(() => tailleList > 1 && emblaApi.plugins().autoplay?.play(), 1000)}>
+            <div className="embla">
                 <div className="embla__viewport" ref={emblaRef}>
                     <div className="embla__container">
                         {mediaList.map((photo, index) => (

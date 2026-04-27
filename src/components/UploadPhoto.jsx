@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from 'react'
 import { supabase } from '../supabase'
 import { AlbumContext, MediaContext } from '../utils/Context'
 
-const UploadPhoto = ({isCover, setCover, albumId, setR2U, setR2K, setFile}) => {
+const UploadPhoto = ({isCover, setCover, albumId, setR2U, setR2K, setFile, changeCover}) => {
   const [status, setStatus] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const {mediaList, setMediaList} = useContext(MediaContext)
@@ -11,6 +11,7 @@ const UploadPhoto = ({isCover, setCover, albumId, setR2U, setR2K, setFile}) => {
   async function handleUpload(e) {
     setIsLoading(true)
     const file = e.target.files[0]
+    console.log(file)
     if (!file) return
 
     // 1. Demander l'URL présignée à votre backend
@@ -42,6 +43,7 @@ const UploadPhoto = ({isCover, setCover, albumId, setR2U, setR2K, setFile}) => {
       }).select()
       const newList = [data[0], ...mediaList]
       setMediaList(newList)
+      changeCover && setCover(publicUrl)
     } else {
       setFile(file)
       setR2U(publicUrl)

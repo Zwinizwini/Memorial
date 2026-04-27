@@ -54,7 +54,7 @@ const AlbumList = () => {
 
             <ListeAlbum>
                 {albumList.map(album => (
-                    <StyleLi key={album.id} to={`/album/${album.id}/${album.name}`}>
+                    <StyleLi key={album.id} to={`/album/${album.id}`}>
                         <AlbumItem album={album}/>
                     </StyleLi>
                 ))}
