@@ -81,7 +81,7 @@ const AlbumModif = () => {
       </Header>
       <div className="content" style={{background: "#f8f7f5"}}>
         <p className="tag" style={{marginBottom: "12px"}}>Photo de couverture</p>
-        <UploadPhoto albumId={parseInt(id)} setCover={setCover} changeCover={true}/>
+        <UploadPhoto albumId={parseInt(id)} setCover={setCover} changeCover={true} cover={cover}/>
         <label className="tag" style={{marginBottom: "12px"}}>Titre de l'album</label>
         <input 
           type="text" 

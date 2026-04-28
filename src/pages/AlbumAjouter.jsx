@@ -78,7 +78,6 @@ const AlbumAjouter = () => {
   const [titre, setTitre] = useState('')
   const [cover, setCover] = useState('')
   const [music, setMusic] = useState('')
-  const [isAjout, setIsAjout] = useState(false)
   const [r2Key, setR2K] = useState('')
   const [r2Url, setR2U] = useState('')
   const [fileS, setFile] = useState({})
@@ -112,10 +111,6 @@ const AlbumAjouter = () => {
     album.id = data[0].id
     const newList = [album, ...albumList]
     saveAlbumList(newList)
-    setIsAjout(true)
-    setTimeout(() => {
-      setIsAjout(false)
-    }, 3000)
     navigate(`/album/${data[0].id}`)
   }
 
@@ -127,7 +122,7 @@ const AlbumAjouter = () => {
       </Header>
       <div className="content" style={{background: "#f8f7f5"}}>
         <p className="tag" style={{marginBottom: "12px"}}>Photo de couverture</p>
-        <UploadPhoto isCover={true} setCover={setCover} setR2K={setR2K} setR2U={setR2U} setFile={setFile}/>
+        <UploadPhoto isCover={true} setCover={setCover} setR2K={setR2K} setR2U={setR2U} setFile={setFile} cover={cover}/>
         <label className="tag" style={{marginBottom: "12px"}}>Titre de l'album</label>
         <input 
           type="text" 
@@ -146,7 +141,6 @@ const AlbumAjouter = () => {
       </div>
       <DivBtn>
         <BtnRetour onClick={() => navigate(-1)}>← Annuler</BtnRetour>
-        {isAjout && <ErrorBanner><ErrorText>Album ajouté avec succes</ErrorText></ErrorBanner>}
         <button className="btnValider"  onClick={() => handleClick()}>Créer l'album</button>
       </DivBtn>
     </>

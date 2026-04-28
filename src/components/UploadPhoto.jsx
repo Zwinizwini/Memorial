@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from 'react'
 import { supabase } from '../supabase'
 import { AlbumContext, MediaContext } from '../utils/Context'
 
-const UploadPhoto = ({isCover, setCover, albumId, setR2U, setR2K, setFile, changeCover}) => {
+const UploadPhoto = ({isCover, setCover, albumId, setR2U, setR2K, setFile, changeCover, cover}) => {
   const [status, setStatus] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const {mediaList, setMediaList} = useContext(MediaContext)
@@ -51,17 +51,17 @@ const UploadPhoto = ({isCover, setCover, albumId, setR2U, setR2K, setFile, chang
       setCover(publicUrl)
     }
 
-
     setStatus(true)
     setIsLoading(false)
   }
 
   return (
-    isCover ? 
+    (isCover || changeCover) ? 
       <div className='new-album' onClick={() => inputRef.current.click()}>
         <div className='btnplus'>+</div>
         <p>{!status ? "Choisir une photo" : "Photo Ajouté"}</p>
         {isLoading && <div className="loader"></div>}
+        {cover && <img src={cover} alt='aperuçu Cover' className='cover-apercus'/>}
         <input type="file" accept="image/*,video/*" ref={inputRef} onChange={(e) => handleUpload(e)} style={{display:"none"}}/>
       </div> 
     : 
